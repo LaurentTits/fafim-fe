@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-sm-8 col-sm-offset-2">
+    <form [formGroup]="fondsForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="isin">
+          Code isin
+        </label>
+        <input type="text" id="isin" class="form-control" formControlName="isin">
+      </div>
+      <div *ngIf="(fondsForm.controls['isin'].invalid && fondsForm.controls['isin'].touched)" class="alert">
+          Isin incorrect (12 caractères)
+      </div>
+
+      <div class="form-group">
+        <label for="name">
+          Nom du fonds
+        </label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+      </div>
+      <div *ngIf="(fondsForm.controls['name'].invalid && fondsForm.controls['name'].touched)" class="alert">
+          Nom incorrect (min: 1/max: 50)
+      </div>
+
+      <div class="form-group">
+        <label for="status">
+          Caractéristique du fonds
+        </label>
+        <select id="status" class="form-control" formControlName="esg">
+          <option value='true'>fonds ESG</option>
+          <option value='false'>fonds non ESG</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="description">
+          Description
+        </label>
+        <input type="text" id="description" class="form-control" formControlName="description">
+      </div>
+
+      <ng-container formArrayName="fondsLocaux">
+        <h3>Cotation du fonds sur une bourse dans une devise</h3>
+        <ng-container class="form-group" *ngFor="let fondsLocalForm of fondsLocaux.controls; let i = index">
+          <form [formGroup]="getFondsLocalForm(i)">
+            <label for="ticker">Ticker Symbol</label>
+            <input type="input" class="form-control" formControlName="tickerSymbol">
+            <div *ngIf="(getFondsLocalForm(i).controls['tickerSymbol'].invalid && getFondsLocalForm(i).controls['tickerSymbol'].touched)" class="alert">
+                Ticker Symbol incorrect (min: 1/max: 4)
+            </div>
+
+            <label for="devise">Devise</label>
+            <select class="form-control" formControlName="devise">
+              <option value='USD'>Dollar américain (USD)</option>
+            </select>
+
+            <label for="mic">Bourse</label>
+            <select class="form-control" formControlName="mic">
+              <option value='XNAS'>NASDAQ (XNAS)</option>
+            </select>
+
+            <button type="button" class="btn delete-btn" (click)="onDeleteFondsLocal(i)">Supprimer</button>
+
+          </form>
+        </ng-container>
+
+        <button type="button" class="btn btn-success" (click)="onAddFondsLocal()">Ajouter une autre bourse/devise</button>
+        <div> &nbsp; </div>
+      </ng-container>
+
+
+
+      <div> &nbsp; </div>
+
+      <button class="btn btn-primary" type="submit" [disabled]="fondsForm.invalid">Enregistrer</button>
+    </form>
+  </div>
+</div>

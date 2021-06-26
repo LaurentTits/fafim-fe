@@ -1,0 +1,34 @@
+<div class="col-sm-8 col-sm-offset-2">
+  <h2> Ordre d'achat effectué pour le client {{idClient}}.</h2>
+  <form [formGroup]="ordreAchatForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <div>  &nbsp; </div>
+      <label for="portefeuille">Portefeuille type dans lequel l'investissement est réalisé : </label>
+      <select id="portefeuille" class="form-control" formControlName="portefeuille">
+        <option *ngFor="let portefeuille of portefeuilles;" value={{portefeuille.id}}>{{portefeuille.nom}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="montant">Montant (centimes)</label>
+      <input type="number" step="1" pattern="\d+" id="montant" class="form-control" formControlName="montant">
+    </div>
+    <div *ngIf="(ordreAchatForm.controls['montant'].invalid && ordreAchatForm.controls['montant'].touched)" class="alert">
+        Le montant doit être un nombre entier.
+    </div>
+
+    <label for="devise">Devise</label>
+    <select class="form-control" formControlName="devise">
+      <option value='USD'>Dollar américain (USD)</option>
+    </select>
+
+    <div class="form-group">
+      <label for="orderDate">Date de l'ordre d'achat</label>
+      <input type="date" id="orderhDate" class="form-control" formControlName="orderDate">
+    </div>
+
+    <div>  &nbsp; </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="ordreAchatForm.invalid">Enregister ordre d'achat</button>
+  </form>
+</div>

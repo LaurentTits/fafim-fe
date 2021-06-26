@@ -1,0 +1,23 @@
+<h2>Évolution du cours<h2>
+
+<h3> Ticker Symbol : {{symbol}}</h3>
+
+<!-- <h2>{{url}}</h2> -->
+
+<!-- <button class="btn btn-primary"
+        (click)="onFetch()">Récupérer les valeurs du fonds</button> -->
+
+<h3> {{quote}} </h3>
+
+<!-- width="100%" => pas de scrolling sur les petits écrans, mais vraiment moche -->
+<canvas baseChart width="400" height="400"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType">
+</canvas>
+
+<!-- <button class="btn btn-primary"
+        (click)="onFetch2()">Mettre à jour le graphique</button> -->

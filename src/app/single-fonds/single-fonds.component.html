@@ -1,0 +1,15 @@
+<h2>{{ name }}</h2>
+
+<p *ngIf="esg === 'false'"> Le fonds n'est pas ESG.</p>
+<p *ngIf="esg === 'true'"> Le fonds est ESG.</p>
+
+<h2>Données du fonds choisi :<h2>
+
+<h3> Bourse : {{ bourse }} - Devise : {{ devise }} </h3>
+
+<app-stock-values [symbol]="tickerSymbol"></app-stock-values>
+
+
+<p>&nbsp;</p>
+
+<a routerLink="/fonds">Retour à la liste</a>

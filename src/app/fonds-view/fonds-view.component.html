@@ -1,0 +1,38 @@
+<div class="container">
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h2>Mes fonds</h2>
+    <!-- <p>Mis à jour : {{ lastUpdate | async | date : 'le dd.MM.y à HH:mm:ss' | lowercase }}</p> -->
+    <ul class="list-group">
+      <app-fonds *ngFor="let fonds of fondsArray; let i = index"
+      [tickerSymbol]="fonds.tickerSymbol"
+      [devise] = "fonds.devise"
+      [bourse] = "fonds.bourse"
+      [fondsName]="fonds.nom"
+      [esg]="fonds.esg"
+      [isin] = "fonds.isin"
+      [description] = "fonds.description"
+      [index] = "i"></app-fonds>
+      <!-- <app-fonds [fondsName]='fonds2' [esg]="'fondsNonEsg'"></app-fonds>
+      <app-fonds [fondsName]='fonds3' [esg]="'fondsEsg'"></app-fonds> -->
+    </ul>
+
+  <div>&nbsp;</div>
+
+  <div class="col text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div>&nbsp;</div>
+
+    <button class="btn btn-success" (click)="onEsgAll()">Tout Rendre ESG</button>
+            <!-- [disabled]="!isAuth" -->
+
+    <button class="btn btn-danger"
+            (click)="onUnesgAll()">Retirer tous les labels</button>
+    </div>
+
+
+  </div>
+</div>
+</div>
+
+<div>&nbsp;</div>

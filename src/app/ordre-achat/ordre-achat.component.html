@@ -1,0 +1,49 @@
+<h2>Ordres d'achat du client</h2>
+
+<div class="container col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <table class="table table-dark table-striped table-hover table-bordered table-responsive">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Horodatage</th>
+        <th scope="col">Montant</th>
+        <th scope="col">Portefeuille</th>
+        <th scope="col">Devise</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ordreAchat of ordresAchat; index as i;">
+        <th scope="row"> {{i+1}} </th>
+        <td>{{ ordreAchat.horodatage.date | date : 'le dd.MM.y à h:mm:ss' }}</td>
+        <td>{{ centsToDecimal(ordreAchat.montant) | currency: ordreAchat.codeDevise}}</td>
+        <td>{{ ordreAchat.nomPortefeuille }}</td>
+        <td>{{ ordreAchat.codeDevise}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="panel panel-default" *ngFor="let depense of depenses;">
+    <div class="panel-body">
+      Dépense totale en {{depense.codeDevise}} :
+      <b>{{centsToDecimal(depense.montantTotal) | currency: depense.codeDevise }}</b>
+    </div>
+  </div>
+
+  <h3 *ngIf="ordresAchat.length === 0">
+    Ce client n'a pas fait d'ordres d'achat.
+  </h3>
+
+  <div class="col text-center col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+    <div>&nbsp;</div>
+
+    <button class="btn" id="buttonNewOA" (click)="onNewOA()">Nouvel ordre d'achat</button>
+    &nbsp;
+    <button class="btn" id="buttonBack" (click)="onBack()">Retour</button>
+
+  </div>
+
+
+
+
+</div>

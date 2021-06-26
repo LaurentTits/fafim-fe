@@ -1,0 +1,58 @@
+<div class="col-sm-8 col-sm-offset-2">
+  <form [formGroup]="clientForm" (ngSubmit)="onSubmitForm()">
+    <div class="form-group">
+      <label for="lastName">Nom</label>
+      <input type="text" id="lastName" class="form-control" formControlName="lastName">
+    </div>
+    <div *ngIf="(clientForm.controls['lastName'].invalid && clientForm.controls['lastName'].touched)" class="alert">
+        Nom incorrect (min: 2/max: 50)
+    </div>
+
+    <div class="form-group">
+      <label for="firstName">Prénom</label>
+      <input type="text" id="firstName" class="form-control" formControlName="firstName">
+    </div>
+    <div *ngIf="(clientForm.controls['firstName'].invalid && clientForm.controls['firstName'].touched)" class="alert">
+        Nom incorrect (min: 2/max: 50)
+    </div>
+
+    <div class="form-group">
+      <label for="birthDate">Date de Naissance</label>
+      <input type="date" id="birthDate" class="form-control" formControlName="birthDate">
+    </div>
+    <div class="form-group">
+      <label for="sexe">Sexe</label>
+      <select id="sexe" class="form-control" formControlName="sexe">
+        <option value="1">Homme</option>
+        <option value="2">Femme</option>
+        <option value="3">Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pub">De quelle façon voulez-vous être contacté dans le cadre de campagnes publicitaires ?</label>
+      <select id="pub" class="form-control" formControlName="pub">
+        <option value="1">Mail</option>
+        <option value="2">Téléphone</option>
+        <option value="3">Mail + Téléphone</option>
+        <option value="4">Aucun</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" class="form-control" formControlName="email">
+    </div>
+    <div *ngIf="(clientForm.controls['email'].invalid && clientForm.controls['email'].touched)" class="alert">
+        Adresse email invalide
+    </div>
+
+    <div formArrayName="phones">
+      <h3>Numéro(s) de téléphone du client</h3>
+      <div class="form-group" *ngFor="let phoneControl of getPhones().controls; let i = index">
+        <input type="text" class="form-control" [formControlName]="i">
+      </div>
+      <button type="button" class="btn btn-success" (click)="onAddPhone()">Ajouter un numéro de téléphone</button>
+    </div>
+    <div>&nbsp;</div>
+    <button type="submit" class="btn btn-primary" [disabled]="clientForm.invalid">Soumettre</button>
+  </form>
+</div>

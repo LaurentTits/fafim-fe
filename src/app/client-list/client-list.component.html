@@ -1,0 +1,52 @@
+<ul class="list-group">
+  <li class="list-group-item col-xs-12 col-sm-12 col-md-4 col-lg-4"
+  *ngFor="let client of clients" [ngStyle]="{color: color}"
+  style="background-color:grey;">
+    <h3>{{ client.firstName }} {{ client.lastName }}</h3>
+    <p><i class="fa fa-envelope-o fa-1x sr-contact" style="color:lightgreen"></i>  &nbsp; {{ client.email }}</p>
+    <p>Date de naissance : {{ client.birthDate.date | date : 'le dd.MM.y' }}</p>
+    <p>Sexe :
+    <span *ngIf="client.sexe == 1">
+        Homme
+    </span>
+    <span *ngIf="client.sexe == 2">
+        Femme
+    </span>
+    <span *ngIf="client.sexe == 3">
+        Autre
+    </span>
+    </p>
+
+    <p>Ce client souhaite être contacté via les canaux suivants :</p>
+    <p *ngIf="client.pub == 1">
+        mail
+    </p>
+    <p *ngIf="client.pub == 2">
+        téléphone
+    </p>
+    <p *ngIf="client.pub == 3">
+        mail + téléphone
+    </p>
+    <p *ngIf="client.pub == 4">
+        aucun canal
+    </p>
+
+    <p *ngIf="client.phones && client.phones.length > 0">
+      Ce client possède les numéros de téléphone suivants :
+      <span *ngFor="let phone of client.phones">{{ phone }} <i class="fa fa-phone fa-1x sr-contact" style="color:lightgreen"></i> &nbsp; </span>
+    </p>
+
+    <p *ngIf="client.phones && client.phones.length === 0">
+      Ce client possède les numéros de téléphone suivants :
+      <span>Aucun numéro enregistré pour ce client. &nbsp; </span>
+    </p>
+
+    <button class="btn" id="buttonVisualisationAchats" (click)="onVisualiseAchats(client.id)">Ordres d'achat</button>
+    &nbsp;
+    <button class="btn" id="buttonDeleteClient" (click)="onDeleteClient(client)">Supprimer le client</button>
+
+  </li>
+  <li class="list-group-item col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <a routerLink="/new-client"> Nouveau client</a>
+  </li>
+</ul>

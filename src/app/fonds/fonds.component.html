@@ -1,0 +1,29 @@
+<li [ngClass]="{'list-group-item': true,
+                'list-group-item-success': esg === 'true',
+                'list-group-item-danger': esg === 'false'}"
+    class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+  <!-- <div style="width:20px;height:20px;background-color:red;"
+     *ngIf="esg === 'false'"></div> -->
+  <h4>Nom du fonds : {{ getName() }} </h4>
+  <h4 *ngIf="esg === 'true'" [ngStyle]="{color: getColor()}">Le fonds est un fonds ESG.</h4>
+  <h4 *ngIf="esg === 'false'" [ngStyle]="{color: getColor()}">Le fonds n'est pas un fonds ESG.</h4>
+
+  <h4>Commentaires : {{ description }} </h4>
+
+  <input type="text" class="form-control" [(ngModel)]="description">
+
+  <a [routerLink] ="[tickerSymbol]">Détails</a>
+
+  <div>&nbsp;</div>
+
+  <button class="btn btn-primary"
+          (click)='onSave(description)'>Sauver Commentaires</button>
+
+  <button class="btn btn-sm btn-success"
+          *ngIf="esg === 'false'"
+          (click)="onSwitch()">Rendre ESG</button>
+  <button class="btn btn-sm btn-danger"
+          *ngIf="esg === 'true'"
+          (click)="onSwitch()">Retirer label ESG</button>
+
+</li>

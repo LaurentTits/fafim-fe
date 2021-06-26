@@ -1,0 +1,18 @@
+.background-building {
+  /**background-image: url("..\..\assets\images\building.JPG");
+  background-repeat: no-repeat;*/
+  background-position: center;
+  background-color: green;
+  border-radius: 25px;
+  /**height: 870px;
+  width: 500px;*/
+}
+
+/*.crelan{
+  max-height: 870px;
+  max-width: 500px
+}*/
+
+#authentification {
+
+}
